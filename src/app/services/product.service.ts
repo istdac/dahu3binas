@@ -11,19 +11,19 @@ export class ProductService {
   constructor() { 
     this.products = [{
       idProduct: '1',
-      name:"manzana",
+      name:"Manzana",
       price:15,
       photo:"https://picsum.photos/200",
       quantity:0
     },{
       idProduct: '2',
-      name:"platano",
+      name:"Platano",
       price:20,
       photo:"https://picsum.photos/200",
       quantity:0
     },{
       idProduct: '3',
-      name:"pera",
+      name:"Pera",
       price:25,
       photo:"https://picsum.photos/200",
       quantity:0

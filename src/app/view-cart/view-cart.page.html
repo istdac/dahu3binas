@@ -3,14 +3,22 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>viewCart</ion-title>
+    <ion-title>Carrito</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item button *ngFor="let item of cart.products; let i=index">
+      <ion-thumbnail>
+        <ion-img class="rounded-photo" src="{{item.photo}}"></ion-img>
+      </ion-thumbnail>
+      <ion-label> {{item.name}} ${{item.price*item.quantity}}</ion-label>
+    </ion-item>
+  </ion-list>
   <ion-card>
     <ion-label>
-      {{cart.total}}
+      El total es: {{cart.total}}$
     </ion-label>
   </ion-card>
 </ion-content>

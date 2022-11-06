@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'view-cart',
     loadChildren: () => import('./view-cart/view-cart.module').then( m => m.ViewCartPageModule)
   },
+  {
+    path: 'view-add-product',
+    loadChildren: () => import('./view-add-product/view-add-product.module').then( m => m.ViewAddProductPageModule)
+  },
 ];
 
 @NgModule({

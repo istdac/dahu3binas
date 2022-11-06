@@ -10,16 +10,19 @@
   <ion-list>
     <ion-item button *ngFor="let item of products; let i=index" (click)="getProductById(item.idProduct)">
       <ion-thumbnail>
-        <ion-img src="{{item.photo}}"></ion-img>
+        <ion-img class="rounded-photo" src="{{item.photo}}"></ion-img>
       </ion-thumbnail>
-      <ion-label>   {{item.name}}  ${{item.price}}</ion-label>
+      <ion-label> {{item.name}} ${{item.price}}</ion-label>
       <ion-button slot="end" (click)="addProductToCart(item);$event.stopPropagation()">
         <!-- (click)="addProductToCart(item.id)"> -->
-          <ion-icon name="cart"></ion-icon>
-        </ion-button>
+        <ion-icon name="cart"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="addProduct()">
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
     <ion-fab-button (click)="getCart()">
       <ion-icon name="cart"></ion-icon>
     </ion-fab-button>
