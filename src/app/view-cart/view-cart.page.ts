@@ -1,3 +1,6 @@
+import { ActivatedRoute } from '@angular/router';
+import { CartService } from './../services/cart.service';
+import { Cart } from './../models/cart';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-cart.page.scss'],
 })
 export class ViewCartPage implements OnInit {
-
-  constructor() { }
+  public cart:Cart;
+  constructor(private cs:CartService, private aroute:ActivatedRoute) { }
 
   ngOnInit() {
+    this.cart=this.cs.getCart();
   }
 
 }
