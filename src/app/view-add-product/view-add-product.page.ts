@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-add-product',
@@ -9,16 +10,23 @@ import { ProductService } from '../services/product.service';
 })
 export class ViewAddProductPage implements OnInit {
 
-  prodname:string;
-  prodprice:number
+  prodname: string;
+  prodprice: number
 
-  constructor(private ps:ProductService) { }
+  constructor(private ps: ProductService, private tc: ToastController) { }
 
   ngOnInit() {
   }
 
-  addProduct(){
-      this.ps.addProduct(this.prodname, this.prodprice)
+  public async addProduct() {
+    let toast = await this.tc.create({
+      message: 'Producto agregado correctamente',
+      duration: 1000
+    });
+    this.ps.addProduct(this.prodname, this.prodprice)
+    this.prodname = " "
+    this.prodprice = 0;
+    toast.present();
   }
 
 }

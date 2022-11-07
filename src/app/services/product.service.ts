@@ -41,7 +41,7 @@ export class ProductService {
   }
   public addProduct(nameProd:string, priceProd:number){
     let p:Product={
-      idProduct: this.products.length.toString(), 
+      idProduct: (this.products.length+1).toString(), 
       name: nameProd, 
       price: priceProd, 
       photo: "https://picsum.photos/200", 
