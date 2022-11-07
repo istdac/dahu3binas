@@ -14,7 +14,18 @@ export class CartService {
    public getCart(){
     return this.cart;
    }
-
+   public removeFromCart(p:number){
+    this.cart.products.splice(p, 1);
+    this.total();
+   }
+   public total(){
+    let i=0;
+    this.cart.total=0;
+    while(i<this.cart.products.length){
+      this.cart.total+=(this.cart.products[i].price*this.cart.products[i].quantity);
+      i++;
+    }
+   }
    public addProductToCart(p: Product){
       console.log(this.cart);
       if((this.cart.products.findIndex(
@@ -23,12 +34,12 @@ export class CartService {
         this.cart.products.push(p);
         console.log(this.cart);
       }
-
       let pro = this.cart.products.find(
         (prod)=>prod.idProduct===p.idProduct
       );
       pro.quantity++;
-      this.cart.total+=p.price;
+      this.total();
+      //this.cart.total+=p.price;
    }
 
 }

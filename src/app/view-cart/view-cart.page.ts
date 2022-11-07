@@ -16,4 +16,8 @@ export class ViewCartPage implements OnInit {
     this.cart=this.cs.getCart();
   }
 
+  public deleteCartProduct(i){
+    this.cs.removeFromCart(i);
+  }
+
 }
