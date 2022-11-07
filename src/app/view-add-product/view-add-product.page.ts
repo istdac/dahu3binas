@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../models/product';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-view-add-product',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewAddProductPage implements OnInit {
 
-  constructor() { }
+  prodname:string;
+  prodprice:number
+
+  constructor(private ps:ProductService) { }
 
   ngOnInit() {
+  }
+
+  addProduct(){
+      this.ps.addProduct(this.prodname, this.prodprice)
   }
 
 }

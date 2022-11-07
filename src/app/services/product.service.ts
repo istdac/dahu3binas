@@ -39,5 +39,14 @@ export class ProductService {
     );
     return item;
   }
+  public addProduct(nameProd:string, priceProd:number){
+    let p:Product={
+      idProduct: this.products.length.toString(), 
+      name: nameProd, 
+      price: priceProd, 
+      photo: "https://picsum.photos/200", 
+      quantity: 0};
+    this.products.push(p);
+  }
 
 }
