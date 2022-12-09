@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class CartService {
   private cart: Cart;
-  constructor(private ps:ProductService) {
+  constructor(private ps: ProductService) {
     this.cart = {products: [], total: 0};
    }
    public getCart(){
@@ -29,13 +29,14 @@ export class CartService {
    public addProductToCart(p: Product){
       console.log(this.cart);
       if((this.cart.products.findIndex(
-        (prod)=>prod.idProduct===p.idProduct
+        (prod)=>prod.name===p.name
       ))===-1){
+
         this.cart.products.push(p);
         console.log(this.cart);
       }
       let pro = this.cart.products.find(
-        (prod)=>prod.idProduct===p.idProduct
+        (prod)=>prod.name===p.name
       );
       pro.quantity++;
       this.total();

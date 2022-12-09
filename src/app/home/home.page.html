@@ -8,7 +8,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item button *ngFor="let item of products; let i=index" (click)="getProductById(item.idProduct)">
+    <ion-item button *ngFor="let item of products; let i=index" (click)="getProductById(item.id)">
       <ion-thumbnail>
         <ion-img class="rounded-photo" src="{{item.photo}}"></ion-img>
       </ion-thumbnail>

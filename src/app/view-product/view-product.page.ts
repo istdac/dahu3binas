@@ -11,13 +11,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViewProductPage implements OnInit {
   public product: Product;
-  constructor(private prodServ: ProductService, private aroute: ActivatedRoute) { }
+  public id: string;
+  constructor(private prodServ: ProductService, private aroute: ActivatedRoute) { 
+    this.product= {
+      name:'',
+      price:0,
+      quantity:0,
+      photo:''
+    };
+  }
 
   ngOnInit() {
     this.aroute.queryParams.subscribe(
       (params)=>{
-        this.product=this.prodServ.getProductById(params.id);
-        console.log(this.product)
+        this.prodServ.getProductById(params.id).subscribe(item=>{
+          this.product=item as Product;
+          this.id= params.id;
+        });
       }
     );
   }

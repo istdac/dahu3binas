@@ -1,52 +1,58 @@
 import { Injectable } from '@angular/core';
 import { IonItemSliding } from '@ionic/angular';
 import { Product } from '../models/product';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private products:Product[];
-  constructor() { 
+  private products: Product[];
+  constructor(private firestore: AngularFirestore) {
     this.products = [{
       idProduct: '1',
-      name:"Manzana",
+      name:'Manzana',
       price:15,
-      photo:"https://picsum.photos/200",
+      photo:'https://picsum.photos/200',
       quantity:0
     },{
       idProduct: '2',
-      name:"Platano",
+      name:'Platano',
       price:20,
-      photo:"https://picsum.photos/200",
+      photo:'https://picsum.photos/200',
       quantity:0
     },{
       idProduct: '3',
-      name:"Pera",
+      name:'Pera',
       price:25,
-      photo:"https://picsum.photos/200",
+      photo:'https://picsum.photos/200',
       quantity:0
     }]
   }
-  public getProducts():Product[]{
-    return this.products
+  public getProducts(): Observable<Product[]>{
+    return this.firestore.collection('productos')
+      .snapshotChanges().pipe(
+        map(actions=>actions.map(a=>{
+            const data = a.payload.doc.data() as Product;
+            const id = a.payload.doc.id;
+            return {id,...data};
+          }))
+      );
   }
-  public getProductById(id: string):Product{
-    let item: Product;
-    item = this.products.find(
-      (produ)=> produ.idProduct===id
-    );
-    return item;
+  public getProductById(id: string){
+    let result = this.firestore.collection('productos').doc(id).valueChanges();
+    return result;
   }
-  public addProduct(nameProd:string, priceProd:number){
-    let p:Product={
-      idProduct: (this.products.length+1).toString(), 
-      name: nameProd, 
-      price: priceProd, 
-      photo: "https://picsum.photos/200", 
+  public addProduct(nameProd: string, priceProd: number){
+    let p: Product={
+      name: nameProd,
+      price: priceProd,
+      photo: 'https://picsum.photos/200',
       quantity: 0};
-    this.products.push(p);
+    this.firestore.collection('productos').add(p);
   }
 
 }
