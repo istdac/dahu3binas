@@ -1,5 +1,5 @@
 export class Product {
-    idProduct: string;
+    idProduct?: string;
     name: string;
     photo: string;
     price: number;

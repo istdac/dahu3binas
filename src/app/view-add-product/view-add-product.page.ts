@@ -11,7 +11,7 @@ import { ToastController } from '@ionic/angular';
 export class ViewAddProductPage implements OnInit {
 
   prodname: string;
-  prodprice: number
+  prodprice: number;
 
   constructor(private ps: ProductService, private tc: ToastController) { }
 

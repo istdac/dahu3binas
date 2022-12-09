@@ -13,13 +13,16 @@ import { ToastController } from '@ionic/angular';
 })
 export class HomePage {
 
-  public products:Product[];
-  public cart:Cart;
-  constructor(private productservice: ProductService, private router:Router, private cs: CartService, private tc: ToastController) {
-    this.products = this.productservice.getProducts()
+  public products: Product[];
+  public cart: Cart;
+  constructor(private productservice: ProductService, private router: Router, private cs: CartService, private tc: ToastController) {
+    this.productservice.getProducts().subscribe(res=>{
+      this.products = res;
+      console.log(this.products)
+    });
   }
 
-  public async addProductToCart(p:Product){
+  public async addProductToCart(p: Product){
     let toast = await this.tc.create({
         message: 'Producto agregado al carrito',
         duration: 1000
@@ -29,14 +32,15 @@ export class HomePage {
     toast.present();
   }
   public addProduct(){
-    this.router.navigate(['/view-add-product'])
+    this.router.navigate(['/view-add-product']);
   }
-  public getProductById(idProd: string){
+  public getProductById(id: string){
+    console.log(id);
     this.router.navigate(['/view-product'],
       {
-        queryParams: {id: idProd}
+        queryParams: {id}
       }
-    )
+    );
   }
   public getCart(){
       this.router.navigate(['/view-cart']);
